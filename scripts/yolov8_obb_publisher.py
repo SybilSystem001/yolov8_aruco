@@ -88,15 +88,16 @@ class CombinedDetectionVisualizer(Node):
         self.aruco_parameters = cv2.aruco.DetectorParameters()
         self.aruco_detector = cv2.aruco.ArucoDetector(self.aruco_dictionary, self.aruco_parameters)
 
-        # Camera calibration parameters (REPLACE WITH YOUR CALIBRATED VALUES)
-        self.mtx = np.array([[800.0, 0.0, 320.0],
-                             [0.0, 800.0, 240.0],
+        # Camera calibration parameters
+        self.mtx = np.array([[1029.5579833984375, 0.0, 644.6905517578125],
+                             [0.0, 1029.5579833984375, 366.17266845703125],
                              [0.0, 0.0, 1.0]])
-        self.dist = np.array([0.1, -0.2, 0.0, 0.0, 0.0])
+        self.dist = np.array([6.6431074142456055, -68.78340148925781, -1.1983673175564036e-05, -0.0007913305889815092, 276.66741943359375])
 
         # ROS2 setup
         self.subscription = self.create_subscription(
             Image,
+            #'/tb4_jazzy/oakd/rgb/preview/image_raw',
             '/oak/rgb/image_raw',
             self.camera_callback,
             10)
@@ -327,9 +328,9 @@ class CombinedDetectionVisualizer(Node):
             self.combined_img_pub.publish(combined_msg)
 
             # Show preview window if enabled
-            if self.show_preview:
-                cv2.imshow('Combined Detection Preview', combined_img)
-                cv2.waitKey(1)  # Non-blocking
+            #if self.show_preview:
+             #   cv2.imshow('Combined Detection Preview', combined_img)
+             #   cv2.waitKey(1)  # Non-blocking
 
         except Exception as e:
             self.get_logger().error(f"Error in camera callback: {str(e)}")
