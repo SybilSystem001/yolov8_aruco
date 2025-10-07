@@ -69,7 +69,7 @@ class CombinedDetectionVisualizer(Node):
 
         # ArUco parameters
         self.declare_parameter("aruco_dictionary_name", "DICT_6X6_250")
-        self.declare_parameter("aruco_marker_side_length", 0.05)  # 5cm markers
+        self.declare_parameter("aruco_marker_side_length", 0.04)  # 4cm markers
         self.declare_parameter("camera_frame", "camera_link")
         self.declare_parameter("show_preview_window", True)  # Enable/disable OpenCV preview window
 
@@ -97,8 +97,8 @@ class CombinedDetectionVisualizer(Node):
         # ROS2 setup
         self.subscription = self.create_subscription(
             Image,
-            #'/tb4_jazzy/oakd/rgb/preview/image_raw',
-            '/oak/rgb/image_raw',
+            '/tb4_jazzy/oakd/rgb/image_raw',
+            #'/oak/rgb/image_raw',
             self.camera_callback,
             10)
 
